@@ -31,7 +31,7 @@ class UserController extends Controller
     // Store new user
     public function store(UserRequest $request)
     {
-        $this->_userService->createUser($request);
+        $this->_userService->createUser($request->validated());
         return redirect()->route('users.index');
     }
 
@@ -45,7 +45,7 @@ class UserController extends Controller
     // Update user
     public function update(UserRequest $request, $id)
     {
-        $this->_userService->updateUser($request, $id);
+        $this->_userService->updateUser($request->validated(), $id);
         return redirect()->route('users.index');
     }
 

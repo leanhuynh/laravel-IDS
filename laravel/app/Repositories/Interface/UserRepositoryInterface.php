@@ -9,9 +9,9 @@ interface UserRepositoryInterface
 
     public function findUserById($id);
 
-    public function createUser(UserRequest $request);
+    public function createUser(array $data);
 
-    public function updateUser(UserRequest $request, $id);
+    public function updateUser(array $data, $id);
 
     public function deleteUser($id);
 }

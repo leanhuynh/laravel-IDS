@@ -15,16 +15,16 @@ class UserService {
         return $this->_userRepository->getAll();
     }
 
-    public function createUser(UserRequest $request) {
-        return $this->_userRepository->createUser($request);
+    public function createUser(array $data) {
+        return $this->_userRepository->createUser($data);
     }
 
     public function findUserById($id) {
         return $this->_userRepository->findUserById($id);
     }
 
-    public function updateUser(UserRequest $request, $id) {
-        return $this->_userRepository->updateUser($request, $id);
+    public function updateUser(array $data, $id) {
+        return $this->_userRepository->updateUser($data, $id);
     }
 
     public function deleteUser($id) {
