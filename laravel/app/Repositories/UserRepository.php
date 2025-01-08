@@ -2,7 +2,8 @@
 namespace App\Repositories;
 use App\Models\User;
 use App\Repositories\Interface\UserRepositoryInterface;
-use Illuminate\Http\Request;
+use App\Http\Request\UserRequest;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryInterface 
 {
@@ -24,21 +25,23 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function createUser(Request $request) {
-        $this->_model::create([
+    public function createUser(UserRequest $request) {
+        $newUser = $this->_model::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password) // mã hóa mật khẩu
         ]);
         return $newUser;
     }
 
-    public function updateUser(Request $request, $id) {
+    public function updateUser(UserRequest $request, $id) {
         $user = $this->_model::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+
+        // mã hóa mật khẩu vừa tạo
         if ($request->password) {
-            $user->password = bcrypt($request->password);
+            $user->password = Hash::make($request->password);
         }
         $user->save();
         return $user;

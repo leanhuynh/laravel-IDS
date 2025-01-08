@@ -1,7 +1,6 @@
 <?php
 namespace App\Services;
-use Illuminate\Http\Request;
-
+use App\Http\Request\UserRequest;
 use App\Repositories\UserRepository;
 
 class UserService {
@@ -16,15 +15,15 @@ class UserService {
         return $this->_userRepository->getAll();
     }
 
-    public function createUser(Request $request) {
-        return $this->_userRepository->createUser();
+    public function createUser(UserRequest $request) {
+        return $this->_userRepository->createUser($request);
     }
 
     public function findUserById($id) {
         return $this->_userRepository->findUserById($id);
     }
 
-    public function updateUser(Request $request, $id) {
+    public function updateUser(UserRequest $request, $id) {
         return $this->_userRepository->updateUser($request, $id);
     }
 
