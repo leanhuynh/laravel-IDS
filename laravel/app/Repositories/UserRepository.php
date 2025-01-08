@@ -25,23 +25,23 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
-    public function createUser(UserRequest $request) {
+    public function createUser(array $data) {
         $newUser = $this->_model::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password) // mã hóa mật khẩu
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']) // mã hóa mật khẩu
         ]);
         return $newUser;
     }
 
-    public function updateUser(UserRequest $request, $id) {
+    public function updateUser(array $data, $id) {
         $user = $this->_model::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
+        $user->name = $data['name'];
+        $user->email = $data['email'];
 
         // mã hóa mật khẩu vừa tạo
-        if ($request->password) {
-            $user->password = Hash::make($request->password);
+        if ($data['password']) {
+            $user->password = Hash::make($data['password']);
         }
         $user->save();
         return $user;
