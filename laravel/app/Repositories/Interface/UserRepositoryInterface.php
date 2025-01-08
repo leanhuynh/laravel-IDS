@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories\Interface;
-use Illuminate\Http\Request;
+use App\Http\Request\UserRequest;
 
 interface UserRepositoryInterface 
 {
@@ -9,9 +9,9 @@ interface UserRepositoryInterface
 
     public function findUserById($id);
 
-    public function createUser(Request $request);
+    public function createUser(UserRequest $request);
 
-    public function updateUser(Request $request, $id);
+    public function updateUser(UserRequest $request, $id);
 
     public function deleteUser($id);
 }

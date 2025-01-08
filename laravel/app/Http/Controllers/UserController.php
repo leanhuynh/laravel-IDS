@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Request\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Services\UserService;
 
@@ -29,14 +29,8 @@ class UserController extends Controller
     }
 
     // Store new user
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
         $this->_userService->createUser($request);
         return redirect()->route('users.index');
     }
@@ -49,14 +43,8 @@ class UserController extends Controller
     }
 
     // Update user
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
-
         $this->_userService->updateUser($request, $id);
         return redirect()->route('users.index');
     }
