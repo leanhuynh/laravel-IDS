@@ -46,13 +46,13 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $this->_userService->updateUser($request->validated(), $id);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', "User updated successfully!");
     }
 
     // Delete user
     public function destroy($id)
     {
         $this->_userService->deleteUser($id);
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', 'User is deleted successfully!');
     }
 }

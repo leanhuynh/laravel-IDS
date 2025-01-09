@@ -6,8 +6,9 @@
 
 @stop
 
-@section('content')
-    
+@section('js')
+    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop
 
 @section('css')
@@ -15,6 +16,18 @@
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
-@section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+@section('content')
+    
 @stop
+
+@if (session('success'))
+    <script>
+        alert('{{session('success')}}');
+    </script>
+@endif
+
+@if (session('fail'))
+    <script>
+        alert('{{session('fail')}}');
+    </script>
+@endif
