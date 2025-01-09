@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Request\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Services\UserService;
+use Illuminate\Support\Facades\App;
 
 class UserController extends Controller
 {
@@ -46,13 +47,13 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $this->_userService->updateUser($request->validated(), $id);
-        return redirect()->route('users.index')->with('success', "User updated successfully!");
+        return redirect()->route('users.index')->with("success", __('messages.user.update.success'));
     }
 
     // Delete user
     public function destroy($id)
     {
         $this->_userService->deleteUser($id);
-        return redirect()->route('users.index')->with('success', 'User is deleted successfully!');
+        return redirect()->route('users.index')->with("success", __('messages.user.delete.success'));
     }
 }
