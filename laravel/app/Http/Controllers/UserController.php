@@ -56,6 +56,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->_userService->deleteUser($id);
-        return redirect()->route('users.index')->with("success", __('messages.user.delete.success'));
+        return response()->json(["message" =>  __('messages.user.delete.success'), "id" => $id]);
     }
 }
