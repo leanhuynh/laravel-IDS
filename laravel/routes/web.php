@@ -16,6 +16,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', function () {
+    // return redirect()->route('users.index');
     return view('welcome');
 });
 
@@ -24,6 +25,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/users', UserController::class);
+
+Route::get('/users/search', [UserController::class, 'search']);
 
 // Route::get('/post', [PostController::class, 'index'])->name('post');
 // Route::get('/post/{id}', [PostController::class, 'findById']);
