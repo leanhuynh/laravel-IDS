@@ -16,7 +16,7 @@ class UserRepository implements UserRepositoryInterface
 
     // implement interface function
     public function getAll() {
-        $users = $this->_model::all();
+        $users = $this->_model->simplePaginate(5);
         return $users;
     }
 

@@ -29,5 +29,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="width:50%; justify-content:center">
+            <!-- Hiển thị các liên kết phân trang -->
+           {{ $users->links() }}
+        </div>
     </div>
 @endsection

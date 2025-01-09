@@ -8,14 +8,23 @@
             @method('PUT')
             <div class="form-group">
                 <label for="name">Name</label>
+                @error('name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
+                 @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
             </div>
             <div class="form-group">
                 <label for="password">Password (Leave blank to keep current)</label>
+                @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div class="form-group">
