@@ -1,6 +1,5 @@
 <?php 
 namespace App\Repositories;
-// use App\Models\User;
 use App\Repositories\Interface\UserRepositoryInterface;
 use App\Http\Request\UserRequest;
 use Illuminate\Support\Facades\Hash;
@@ -12,18 +11,16 @@ class UserRepository implements UserRepositoryInterface
 
     // constructor
     public function __construct() {
-        $this->_model = DB::table('users');
+        $this->_model = app()->make(\App\Models\User::class);
     }
 
     // implement interface function
     public function getAll($keyword) {
         $users = [];
         if (is_null($keyword) || $keyword === '')
-            $users = $this->_model->simplePaginate(5);
+            $users = $this->_model::simplePaginate(5);
         else 
-            $users = $this->_model->where("name", "like", "%{$keyword}%")
-                                ->orWhere("email", "like", "%{$keyword}%")
-                                ->simplePaginate(5);
+            $users = $this->_model::simplePaginate(5);
         return $users;
     }
 
