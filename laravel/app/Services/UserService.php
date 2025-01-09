@@ -11,8 +11,8 @@ class UserService {
         $this->_userRepository = $userRepository;
     }
 
-    public function getAll() {
-        return $this->_userRepository->getAll();
+    public function getAll($keyword) {
+        return $this->_userRepository->getAll($keyword);
     }
 
     public function createUser(array $data) {

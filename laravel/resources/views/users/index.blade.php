@@ -2,6 +2,22 @@
 
 @section('content')
     <div class="container">
+        <h1 class="mb-4">Search Users</h1>
+
+        <!-- Thanh tìm kiếm -->
+        <form action="{{ route('users.index') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="Search by name or email"
+                    value="{{ $search ?? '' }}"
+                >
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
         <h1>Users</h1>
         <a href="{{ route('users.create') }}" class="btn btn-primary">Create New User</a>
         <table class="table mt-3">

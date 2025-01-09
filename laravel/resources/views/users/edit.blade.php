@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                 @error('email')
+                @error('email')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
                 <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>

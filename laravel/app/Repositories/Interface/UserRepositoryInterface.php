@@ -5,7 +5,7 @@ use App\Http\Request\UserRequest;
 
 interface UserRepositoryInterface 
 {
-    public function getAll();
+    public function getAll($keyword);
 
     public function findUserById($id);
 
