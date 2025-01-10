@@ -24,17 +24,17 @@ class UserRequest extends FormRequest {
     public function messages()
     {
         return [
-            'avatar.image' => 'Phải đúng định dạng ảnh',
-            'avatar.max' => 'File ảnh không được vượt quá 2MB',
-            'name.required' => 'Tên là bắt buộc.',
-            'name.unique' => 'Tên không được trùng',
-            'name.max' =>  'Tên không được dài quá 255 ký tự',
-            'email.required' => 'Email là bắt buộc.',
-            'email.unique' => 'Email không được trùng',
-            'email.email' => 'Email chưa đúng định dạng',
-            'password.nullable' => 'Mật khẩu không được để trống',
-            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'password.confirmed' => 'Mật khẩu xác nhận không hợp lệ'
+            'avatar.image' => __('validation.avatar.image'),
+            'avatar.max' => __('validation.avatar.max'),
+            'name.required' => __('validation.name.required'),
+            'name.unique' => __('validation.name.unique'),
+            'name.max' => __('validation.name.max'),
+            'email.required' => __('validation.email.required'),
+            'email.unique' => __('validation.email.unique'),
+            'email.email' => __('validation.email.email'),
+            'password.nullable' => __('validation.password.nullable'),
+            'password.min' => __('validation.password.min'),
+            'password.confirmed' => __('validation.password.confirmed'),
         ];
     }
 }

@@ -181,4 +181,26 @@ return [
 
     'attributes' => [],
 
+    'avatar' => [
+        'image' => 'File must be image',
+        'max' => 'The size is not bigger than 2MB'
+    ],
+
+    'name' => [
+        'required' => 'Name is required',
+        'unique' => 'Name must be unique',
+        'max' => 'Name can not be long than 255 characters'
+    ],
+
+    'email' => [
+        'required' => 'Email is required',
+        'unique' => 'Email must be unique',
+        'email' => 'Email must be right form'
+    ],
+
+    'password' => [
+        'nullable' => 'Password can not be empty',
+        'min' => 'Password must contain at least 8 characters',
+        'confirmed' => 'Confirm password not correct'
+    ]
 ];
