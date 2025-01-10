@@ -13,7 +13,14 @@ class UserController extends Controller
 {
     protected UserService $_userService;
 
-    public function __construct(UserService $userService) {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(UserService $userService)
+    {
+        $this->middleware('auth');
         $this->_userService = $userService;
     }
 
