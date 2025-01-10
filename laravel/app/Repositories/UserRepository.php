@@ -4,6 +4,7 @@ use App\Repositories\Interface\UserRepositoryInterface;
 use App\Http\Request\UserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Common\Constant;
 
 class UserRepository implements UserRepositoryInterface 
 {
@@ -18,9 +19,9 @@ class UserRepository implements UserRepositoryInterface
     public function getAll($keyword) {
         $users = [];
         if (is_null($keyword) || $keyword === '')
-            $users = $this->_model::simplePaginate(5);
+            $users = $this->_model::simplePaginate(Constant::PAGINATE_DEFAULT);
         else 
-            $users = $this->_model::simplePaginate(5);
+            $users = $this->_model::simplePaginate(Constant::PAGINATE_DEFAULT);
         return $users;
     }
 
