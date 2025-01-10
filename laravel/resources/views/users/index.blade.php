@@ -19,7 +19,51 @@
         </form>
 
         <h1>Users</h1>
-        <a href="{{ route('users.create') }}" class="btn btn-primary">Create New User</a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">Create New User</button>
+        <!-- Modal -->
+        <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="{{ route('users.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editUserModalLabel">Create User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="name">Name</label>
+                                @error('name')
+                                    <div class='text-danger'>{{ $message }}</div>
+                                @enderror
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                @error('email')
+                                    <div class='text-danger'>{{ $message }}</div>
+                                @enderror
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password">Password</label>
+                                @error('password')
+                                    <div class='text-danger'>{{ $message }}</div>
+                                @enderror
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password_confirmation">Confirm Password</label>
+                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success mt-3">Save User</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <table class="table mt-3">
             <thead>
                 <tr>
@@ -42,7 +86,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
-                                        <form method="POST">
+                                        <!-- <form method="POST"> -->
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-header">
@@ -77,9 +121,6 @@
                                                 <!-- Confirm password -->
                                                 <div class="mb-3">
                                                     <label for="password_confirmation">Confirm Password</label>
-                                                    @error('password')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
                                                     <input type="password" class="form-control" id="password_confirmation-{{$user->id}}" name="password_confirmation">
                                                 </div>
                                                 <div style="display:none;">
