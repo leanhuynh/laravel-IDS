@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     protected UserService $_userService;
 
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
