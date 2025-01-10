@@ -24,13 +24,21 @@
         <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="{{ route('users.store') }}" method="POST">
+                    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="editUserModalLabel">Create User</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            <!-- avatar -->
+                            <div class="mb-3">
+                                <label for="avatar">Image</label>
+                                @error('avatar')
+                                    <div class="text-danger">{{ $message }} </div>
+                                @enderror
+                                <input type="file" class="form-control" name="avatar" accept="image/*">
+                            </div>
                             <div class="mb-3">
                                 <label for="name">Name</label>
                                 @error('name')
@@ -67,6 +75,7 @@
         <table class="table mt-3">
             <thead>
                 <tr>
+                    <th>Avatar</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Actions</th>
@@ -75,6 +84,11 @@
             <tbody>
                 @foreach($users as $user)
                     <tr id="tr-{{$user->id}}">
+                        @if ($user->avatar)
+                            <td><img src="{{ asset('storage/' . $user->avatar) }}" alt="Uploaded Image" style="height:50px; width:50px"/></td>
+                        @else 
+                            <td>No Image</td>
+                        @endif
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
@@ -85,7 +99,7 @@
                             <div class="modal fade" id="editUserModal-{{$user->id}}" tabindex="-1" aria-labelledby="editUserModalLabel-{{$user->id}}" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
-                                        <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
+                                        <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                                         <!-- <form method="POST"> -->
                                             @csrf
                                             @method('PUT')
@@ -94,6 +108,14 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
+                                                <!-- avatar -->
+                                                <div class="mb-3">
+                                                    <label for="avatar">Image</label>
+                                                    @error('avatar')
+                                                        <div class="text-danger">{{ $message }} </div>
+                                                    @enderror
+                                                    <input type="file" class="form-control" name="avatar" accept="image/*">
+                                                </div>
                                                 <!-- Name -->
                                                 <div class="mb-3">
                                                     <label for="name">Name</label>
