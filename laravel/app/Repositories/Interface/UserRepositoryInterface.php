@@ -5,7 +5,7 @@ use App\Http\Request\UserRequest;
 
 interface UserRepositoryInterface 
 {
-    public function getAll($keyword);
+    public function getAll();
 
     public function findUserById($id);
 
@@ -14,4 +14,6 @@ interface UserRepositoryInterface
     public function updateUser(array $data, $id);
 
     public function deleteUser($id);
+
+    public function searchByKeyword($keyword);
 }

@@ -25,10 +25,9 @@ class UserController extends Controller
     }
 
     // Show all users
-    public function index(Request $request)
+    public function index()
     {
-        $keyword = $request->input('search');
-        $users = $this->_userService->getAll($keyword);
+        $users = $this->_userService->getAll();
         return view('users.index', compact('users'));
     }
 
@@ -55,8 +54,9 @@ class UserController extends Controller
     // Update user
     public function update(UserRequest $request, $id)
     {
-        $this->_userService->updateUser($request->validated(), $id);
-        return redirect()->route('users.index')->with("success", __('messages.user.update.success'));
+        $user = $this->_userService->updateUser($request->validated(), $id);
+        return response()->json(['message' => __('messages.user.update.success'), 'user' => $user]);
+        // return redirect()->route('users.index')->with("success", __('messages.user.update.success'));
     }
 
     // Delete user
@@ -64,5 +64,13 @@ class UserController extends Controller
     {
         $this->_userService->deleteUser($id);
         return response()->json(['message' =>  __('messages.user.delete.success'), 'id' => $id]);
+    }
+
+    public function searchByKeyword(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $users = $this->_userService->searchByKeyword($keyword);
+        return response()->json(['users' => $users]);
+        // return $users;
     }
 }
