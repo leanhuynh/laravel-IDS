@@ -20,58 +20,7 @@
 
         <h1>Users</h1>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">Create New User</button>
-        <!-- Modal -->
-        <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editUserModalLabel">Create User</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- avatar -->
-                            <div class="mb-3">
-                                <label for="avatar">Image</label>
-                                @error('avatar')
-                                    <div class="text-danger">{{ $message }} </div>
-                                @enderror
-                                <input type="file" class="form-control" name="avatar" accept="image/*">
-                            </div>
-                            <div class="mb-3">
-                                <label for="name">Name</label>
-                                @error('name')
-                                    <div class='text-danger'>{{ $message }}</div>
-                                @enderror
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email">Email</label>
-                                @error('email')
-                                    <div class='text-danger'>{{ $message }}</div>
-                                @enderror
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password">Password</label>
-                                @error('password')
-                                    <div class='text-danger'>{{ $message }}</div>
-                                @enderror
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password_confirmation">Confirm Password</label>
-                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success mt-3">Save User</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
         <table class="table mt-3">
             <thead>
                 <tr>
@@ -95,68 +44,6 @@
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal-{{$user->id}}">
                                 Edit User
                             </button>                           
-                            <!-- Modal -->
-                            <div class="modal fade" id="editUserModal-{{$user->id}}" tabindex="-1" aria-labelledby="editUserModalLabel-{{$user->id}}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST" enctype="multipart/form-data">
-                                        <!-- <form method="POST"> -->
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- avatar -->
-                                                <div class="mb-3">
-                                                    <label for="avatar">Image</label>
-                                                    @error('avatar')
-                                                        <div class="text-danger">{{ $message }} </div>
-                                                    @enderror
-                                                    <input type="file" class="form-control" name="avatar" accept="image/*">
-                                                </div>
-                                                <!-- Name -->
-                                                <div class="mb-3">
-                                                    <label for="name">Name</label>
-                                                    @error('name')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="text" class="form-control" id="name-{{$user->id}}" name="name" value="{{ $user->name }}" required>
-                                                </div>
-                                                <!-- Email -->
-                                                <div class="mb-3">
-                                                    <label for="email">Email</label>
-                                                    @error('email')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="email" class="form-control" id="email-{{$user->id}}" name="email" value="{{ $user->email }}" required>
-                                                </div>
-                                                <!-- Password -->
-                                                <div class="mb-3">
-                                                    <label for="password">Password (Leave blank to keep current)</label>
-                                                    @error('password')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <input type="password" class="form-control" id="password-{{$user->id}}" name="password">
-                                                </div>
-                                                <!-- Confirm password -->
-                                                <div class="mb-3">
-                                                    <label for="password_confirmation">Confirm Password</label>
-                                                    <input type="password" class="form-control" id="password_confirmation-{{$user->id}}" name="password_confirmation">
-                                                </div>
-                                                <div style="display:none;">
-                                                    <input type="text" class="form-control" id="user-{{$user->id}}" name="user-{{$user->id}}" value="{{$user->id}}">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
                             
                             <form data-url="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                             <!-- <form style="display:inline;"> -->
@@ -178,13 +65,66 @@
            {{ $users->links() }}
         </div>
     </div>
+
+    <!-- Create User Modal -->
+    <div class="modal fade" id="createUserModal" tabindex="-1" aria-labelledby="createUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="createUserForm" action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createUserModalLabel">Create User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" data-></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- avatar -->
+                        <div class="mb-3">
+                            <label for="avatar">Image</label>
+                            @error('avatar')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                            <input type="file" class="form-control" name="avatar" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name">Name</label>
+                            @error('name')
+                                <div class='text-danger'>{{ $message }}</div>
+                            @enderror
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            @error('email')
+                                <div class='text-danger'>{{ $message }}</div>
+                            @enderror
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password">Password</label>
+                            @error('password')
+                                <div class='text-danger'>{{ $message }}</div>
+                            @enderror
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password_confirmation">Confirm Password</label>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success mt-3">Save User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        // Lắng nghe sự kiện click trên nút "Submit" của tất cả các form
+        // DELETE USER
         $(document).on("click", ".btn.btn-danger", function (event) {
             event.preventDefault();
             var userId = $(this).data("id");
@@ -199,8 +139,8 @@
 
             $.ajax({
                 url: url,
-                method: "POST",
-                data: { _token: csrfToken, _method: "DELETE" }, // Gửi CSRF token
+                type: "DELETE",
+                data: { _token: csrfToken }, // Gửi CSRF token
                 success: function (response) {
                     // thay đổi html
                     row.remove();
@@ -209,6 +149,59 @@
                 },
                 error: function (xhr) {
                     alert("Error: " + xhr.responseJSON.message); // Hiển thị lỗi
+                }
+            });
+        });
+
+        // EDIT USER
+        $('#createUserForm').on("submit", function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // thêm người dùng mới
+                    let avatarHTML = response.user.avatar ? `<td><img src="/storage/${response.user.avatar}" alt="Uploaded Image" style="height:50px; width:50px"/></td>` : `<td>No Image</td>`;
+
+                    let newUserRow = `
+                        <tr id="tr-${response.user.id}">
+                            ${avatarHTML}
+                            <td>${response.user.name}</td>
+                            <td>${response.user.email}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal-${response.user.id}">
+                                    Edit User
+                                </button>                           
+                                
+                                <form data-url="/users/${response.user.id}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <div style="display:none;">
+                                        <input type="text" class="form-control" id="user-${response.user.id}-delete" name="user-${response.user.id}-delete" value="${response.user.id}">
+                                    </div>
+                                    <button type="submit" class="btn btn-danger" data-id="${response.user.id}">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    `;
+                    
+                    $('table tbody').append(newUserRow);
+                    // hiện thị thông báo thành công
+                    alert("Success: " + response.message);
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Something went wrong!';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        errorMessage = xhr.responseJSON.message;
+                    } else if (xhr.status === 422) {
+                        // Xử lý lỗi validation
+                        let errors = xhr.responseJSON.errors;
+                        errorMessage = Object.values(errors).flat().join('\n');
+                    }
+                    alert(errorMessage);
                 }
             });
         });
