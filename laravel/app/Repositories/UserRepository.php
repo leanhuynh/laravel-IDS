@@ -16,12 +16,8 @@ class UserRepository implements UserRepositoryInterface
     }
 
     // implement interface function
-    public function getAll($keyword) {
-        $users = [];
-        if (is_null($keyword) || $keyword === '')
-            $users = $this->_model::simplePaginate(Constant::PAGINATE_DEFAULT);
-        else 
-            $users = $this->_model::simplePaginate(Constant::PAGINATE_DEFAULT);
+    public function getAll() {
+        $users = $this->_model::simplePaginate(Constant::PAGINATE_DEFAULT);
         return $users;
     }
 
@@ -72,5 +68,16 @@ class UserRepository implements UserRepositoryInterface
     public function deleteUser($id) {
         $user = $this->_model::find($id);
         $user->delete();
+    }
+
+    public function searchByKeyword($keyword) {
+        $users = [];
+        if (is_null($keyword) || $keyword === '')
+            $users = $this->_model->get();
+        else 
+            $users = $this->_model::where('name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('email', 'LIKE', '%' . $keyword . '%')->get();
+                        
+        return $users;
     }
 }

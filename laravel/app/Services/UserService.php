@@ -11,8 +11,8 @@ class UserService {
         $this->_userRepository = $userRepository;
     }
 
-    public function getAll($keyword) {
-        return $this->_userRepository->getAll($keyword);
+    public function getAll() {
+        return $this->_userRepository->getAll();
     }
 
     public function createUser(array $data) {
@@ -29,5 +29,9 @@ class UserService {
 
     public function deleteUser($id) {
         return $this->_userRepository->deleteUser($id);
+    }
+
+    public function searchByKeyword($keyword) {
+        return $this->_userRepository->searchByKeyword($keyword);
     }
 }
