@@ -41,8 +41,8 @@ class UserController extends Controller
     // Store new user
     public function store(UserRequest $request)
     {   
-        $this->_userService->createUser($request->validated());
-        return redirect()->route('users.index');
+        $newUser = $this->_userService->createUser($request->validated());
+        return response()->json(['message' => __('messages.user.create.success'), 'user' => $newUser]);
     }
 
     // Show form to edit user
@@ -63,6 +63,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->_userService->deleteUser($id);
-        return response()->json(["message" =>  __('messages.user.delete.success'), "id" => $id]);
+        return response()->json(['message' =>  __('messages.user.delete.success'), 'id' => $id]);
     }
 }

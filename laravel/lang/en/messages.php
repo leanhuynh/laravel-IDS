@@ -1,6 +1,15 @@
 <?php
 
 return [
-    'user.update.success' => 'User updated successfully',
-    'user.delete.success' => 'User deleted successfully'
+    'user' => [
+        'create' => [
+            'success' => 'User created successfully'
+        ],
+        'update' => [
+            'success' => 'User updated successfully'
+        ],
+        'delete' => [
+            'success' => 'User deleted successfully' 
+        ]
+    ]
 ];
