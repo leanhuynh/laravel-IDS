@@ -10,8 +10,6 @@ services:
     container_name: laravel_app
     restart: unless-stopped
     tty: true
-    ports:
-      - "9000:9000"
     environment:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
