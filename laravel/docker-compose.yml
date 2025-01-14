@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: php/Dockerfile
-    image: projectname/php
+    image: laravel-IDS/php
     container_name: laravel_app
     restart: unless-stopped
     tty: true

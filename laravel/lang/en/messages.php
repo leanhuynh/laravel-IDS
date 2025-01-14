@@ -11,5 +11,5 @@ return [
         'delete' => [
             'success' => 'User deleted successfully' 
         ]
-    ]
+    ],
 ];
