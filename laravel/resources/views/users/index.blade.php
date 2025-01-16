@@ -345,7 +345,7 @@
             const query = $('#searchInput').val() ?? '';
 
             $.ajax({
-                url: `{{ route('users.index') }}/search?keyword=${query}`,
+                url: `{{ route('users.search') }}/search?keyword=${query}`,
                 method: 'GET',
                 success: function(response) {
                     $('#pagination').remove();
