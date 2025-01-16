@@ -24,9 +24,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/users/search', [UserController::class, 'searchByKeyword']);
-
-Route::resource('/users', UserController::class);
-
+Route::prefix('/users')->middleware('auth')->group(function() {
+    Route::get('/search', [UserController::class, 'searchByKeyword']);
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+});
 // Route::get('/post', [PostController::class, 'index'])->name('post');
 // Route::get('/post/{id}', [PostController::class, 'findById']);
