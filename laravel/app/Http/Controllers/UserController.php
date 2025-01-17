@@ -12,18 +12,6 @@ use Illuminate\Support\Facades\Log;
 use Exception;
 
 /**
- * @OA\Schema(
- *     schema="User",
- *     type="object",
- *     title="User",
- *     description="Thông tin người dùng",
- *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="name", type="string", example="John Doe"),
- *     @OA\Property(property="email", type="string", example="john.doe@example.com")
- * )
- */
-
-/**
  * @OA\Info(
  *     version="1.0.0",
  *     title="API Documentation",
@@ -49,10 +37,10 @@ class UserController extends Controller
      *     description="Trả về danh sách người dùng",
      *     @OA\Response(
      *         response=200,
-     *         description="Danh sách người dùng",
+     *         description="View với danh sách người dùng",
      *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="./components/schemas/User")
+     *             type="string",
+     *             example="<html>...</html>"
      *         )
      *     )
      * )
