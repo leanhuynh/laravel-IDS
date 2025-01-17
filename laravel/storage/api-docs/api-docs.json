@@ -15,17 +15,56 @@
                 "description": "API này cho phép tạo người dùng mới.",
                 "operationId": "createUser",
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Thông tin người dùng mới",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "../components/schemas/User"
-                                            }
+                                        "message": {
+                                            "type": "string",
+                                            "example": "tạo người dùng mới thành công"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "role_id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh2002@gmail.com"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": "http:/avatar.com"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server bị lỗi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "servers bị lỗi."
                                         }
                                     },
                                     "type": "object"
@@ -51,11 +90,34 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "../components/schemas/User"
-                                            }
+                                        "message": {
+                                            "type": "string",
+                                            "example": "cập nhật thông tin người dùng thành công"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "role_id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh2002@gmail.com"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": "http:/avatar.com"
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -81,11 +143,34 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "../components/schemas/User"
-                                            }
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Xóa tài khoản thành công"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "role_id": {
+                                                    "type": "number",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "leanhuynh2002@gmail.com"
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": "http:/avatar.com"
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -118,15 +203,41 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Danh sách người dùng tìm thấy",
+                        "description": "Danh sách người dùng theo name hoặc email",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "": {
+                                        "users": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "../components/schemas/User"
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number",
+                                                        "example": 1
+                                                    },
+                                                    "role_id": {
+                                                        "type": "number",
+                                                        "example": "1"
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "leanhuynh"
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "example": "leanhuynh2002@gmail.com"
+                                                    },
+                                                    "password": {
+                                                        "type": "string",
+                                                        "example": "32$!sdsdf%3245"
+                                                    },
+                                                    "avatar": {
+                                                        "type": "string",
+                                                        "example": "http://avatar.com"
+                                                    }
+                                                },
+                                                "type": "object"
                                             }
                                         }
                                     },
@@ -148,15 +259,13 @@
                 "operationId": "getUsers",
                 "responses": {
                     "200": {
-                        "description": "Danh sách người dùng",
+                        "description": "View với danh sách người dùng",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "./components/schemas/User"
-                                    }
-                                }
+                                    "type": "string"
+                                },
+                                "example": "<html>...</html>"
                             }
                         }
                     }

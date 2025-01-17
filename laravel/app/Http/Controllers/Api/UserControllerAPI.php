@@ -36,15 +36,57 @@ class UserControllerAPI extends Controller
      *     summary="Tạo người dùng mới",
      *     description="API này cho phép tạo người dùng mới.",
      *     @OA\Response(
-     *         response=200,
+     *         response=201,
      *         description="Thông tin người dùng mới",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
-     *                 type="array",
-     *                 @OA\Items(ref="../components/schemas/User")
+     *                 property="message",
+     *                 type="string",
+     *                 example="tạo người dùng mới thành công"
+     *             ),
+     *             @OA\Property(
+     *                 property="user",
+     *                 type="object",
+     *                 @OA\Property(
+     *                      property="id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="role_id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      example="leanhuynh",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      example="leanhuynh2002@gmail.com",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="avatar",
+     *                      type="string",
+     *                      example="http:/avatar.com",
+     *                 )
      *             )
      *         )
+     *     ),
+     *     @OA\Response(
+     *          response=500,
+     *          description="Server bị lỗi",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                      property="message",
+     *                      type="string",
+     *                      example="servers bị lỗi."
+     *              )
+     *          )
      *     )
      * )
     */
@@ -52,12 +94,12 @@ class UserControllerAPI extends Controller
     {   
         try {
             $newUser = $this->_userService->createUser($request->validated());
-            return response()->json(['status' => StatusCode::HTTP_STATUS_CREATED,'message' => __('messages.user.create.success'), 'user' => $newUser]);
+            return response()->json(['message' => __('messages.user.create.success'), 'user' => $newUser], StatusCode::HTTP_STATUS_CREATED);
         } catch(Exception $e) {
             log::error($e->getMessage());
             return response()->json([
                 'message' -> $e->getMessage(),
-            ], ErrorCode::HTTP_STATUS_INTERNAL_SERVER_ERROR);
+            ], StatusCode::HTTP_STATUS_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -74,8 +116,38 @@ class UserControllerAPI extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
-     *                 type="array",
-     *                 @OA\Items(ref="../components/schemas/User")
+     *                 property="message",
+     *                 type="string",
+     *                 example="cập nhật thông tin người dùng thành công"
+     *             ),
+     *             @OA\Property(
+     *                 property="user",
+     *                 type="object",
+     *                 @OA\Property(
+     *                      property="id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="role_id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      example="leanhuynh",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      example="leanhuynh2002@gmail.com",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="avatar",
+     *                      type="string",
+     *                      example="http:/avatar.com",
+     *                 )
      *             )
      *         )
      *     )
@@ -85,12 +157,12 @@ class UserControllerAPI extends Controller
     {
         try {
             $user = $this->_userService->updateUser($request->validated(), $id);
-            return response()->json(['status' => StatusCode::HTTP_STATUS_ACCEPTED,'message' => __('messages.user.update.success'), 'user' => $user]);
+            return response()->json(['message' => __('messages.user.update.success'), 'user' => $user], StatusCode::HTTP_STATUS_ACCEPTED);
         } catch (Exception $e) {
             log::error($e->getMessage());
             return response()->json([
                 'message' -> $e->getMessage(),
-            ], ErrorCode::HTTP_STATUS_INTERNAL_SERVER_ERROR);
+            ], StatusCode::HTTP_STATUS_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -107,8 +179,38 @@ class UserControllerAPI extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
-     *                 type="array",
-     *                 @OA\Items(ref="../components/schemas/User")
+     *                 property="message",
+     *                 type="string",
+     *                 example="Xóa tài khoản thành công"
+     *             ),
+     *             @OA\Property(
+     *                 property="user",
+     *                 type="object",
+     *                 @OA\Property(
+     *                      property="id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="role_id",
+     *                      type="number",
+     *                      example=1,
+     *                 ),
+     *                 @OA\Property(
+     *                      property="name",
+     *                      type="string",
+     *                      example="leanhuynh",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="email",
+     *                      type="string",
+     *                      example="leanhuynh2002@gmail.com",
+     *                 ),
+     *                 @OA\Property(
+     *                      property="avatar",
+     *                      type="string",
+     *                      example="http:/avatar.com",
+     *                 )
      *             )
      *         )
      *     )
@@ -118,7 +220,7 @@ class UserControllerAPI extends Controller
     {
         try {
             $this->_userService->deleteUser($id);
-            return response()->json(['status' => StatusCode::HTTP_STATUS_OK, 'message' =>  __('messages.user.delete.success'), 'id' => $id]);
+            return response()->json(['message' =>  __('messages.user.delete.success'), 'id' => $id], StatusCode::HTTP_STATUS_OK);
         } catch (Exception $e) {
             log::error($e->getMessage());
             return response()->json([
@@ -146,13 +248,46 @@ class UserControllerAPI extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Danh sách người dùng tìm thấy",
+     *         description="Danh sách người dùng theo name hoặc email",
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(
-     *                 type="array",
-     *                 @OA\Items(ref="../components/schemas/User")
-     *             )
+     *                  property="users",
+     *                  type="array",
+     *                  @OA\Items(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="id",
+     *                          type="number",
+     *                          example=1
+     *                      ),
+     *                      @OA\Property(
+     *                          property="role_id",
+     *                          type="number",
+     *                          example="1",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="name",
+     *                          type="string",
+     *                          example="leanhuynh"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="email",
+     *                          type="string",
+     *                          example="leanhuynh2002@gmail.com",
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string",
+     *                          example="32$!sdsdf%3245"
+     *                      ),
+     *                      @OA\Property(
+     *                          property="avatar",
+     *                          type="string",
+     *                          example="http://avatar.com",
+     *                      ),
+     *                  ),
+     *             ),
      *         )
      *     )
      * )
@@ -162,7 +297,7 @@ class UserControllerAPI extends Controller
         try {
             $keyword = $request->input('keyword');
             $users = $this->_userService->searchByKeyword($keyword);
-            return response()->json(['status' => StatusCode::HTTP_STATUS_OK,'users' => $users]);
+            return response()->json(['users' => $users], StatusCode::HTTP_STATUS_OK);
         } catch (Exception $e) {
             log::error($e->getMessage());
             return response()->json([
