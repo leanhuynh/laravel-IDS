@@ -11,22 +11,52 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Exception;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     title="User",
+ *     description="Thông tin người dùng",
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="name", type="string", example="John Doe"),
+ *     @OA\Property(property="email", type="string", example="john.doe@example.com")
+ * )
+ */
+
+/**
+ * @OA\Info(
+ *     version="1.0.0",
+ *     title="API Documentation",
+ *     description="Tài liệu API"
+ * )
+ */
 class UserController extends Controller
 {
     protected UserService $_userService;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct(UserService $userService)
     {
         // $this->middleware('auth');
         $this->_userService = $userService;
     }
 
-    // Show all users
+    /**
+     * @OA\Get(
+     *     path="/users",
+     *     operationId="getUsers",
+     *     tags={"Users"},
+     *     summary="Lấy danh sách người dùng",
+     *     description="Trả về danh sách người dùng",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Danh sách người dùng",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="./components/schemas/User")
+     *         )
+     *     )
+     * )
+     */
     public function index()
     {
         try {
@@ -34,21 +64,7 @@ class UserController extends Controller
             return view('users.index', compact('users'));
         } catch (Exception $e) {
             log::error($e->getMessage());
-            view('home');
-        }
-    }
-
-    public function searchByKeyword(Request $request)
-    {
-        try {
-            $keyword = $request->input('keyword');
-            $users = $this->_userService->searchByKeyword($keyword);
-            return response()->json(['users' => $users]);
-        } catch (Exception $e) {
-            log::error($e->getMessage());
-            return response()->json([
-                'message' -> $e->getMessage(),
-            ], 500);
+            return view('home');
         }
     }
 }

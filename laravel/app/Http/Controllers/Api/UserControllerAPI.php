@@ -28,7 +28,26 @@ class UserControllerAPI extends Controller
         $this->_userService = $userService;
     }
 
-    // Store new user
+    /**
+     * @OA\Get(
+     *     path="/",
+     *     operationId="createUser",
+     *     tags={"Users"},
+     *     summary="Tạo người dùng mới",
+     *     description="API này cho phép tạo người dùng mới.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thông tin người dùng mới",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 @OA\Items(ref="./components/schemas/User")
+     *             )
+     *         )
+     *     )
+     * )
+    */
     public function store(UserRequest $request)
     {   
         try {
@@ -42,7 +61,26 @@ class UserControllerAPI extends Controller
         }
     }
 
-    // Update user
+    /**
+     * @OA\Get(
+     *     path="/users/update",
+     *     operationId="updateUser",
+     *     tags={"Users"},
+     *     summary="Cập nhật thông tin người dùng",
+     *     description="API này cho phép cập nhật thông tin người dùng.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thông tin người dùng mới cập nhật",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 @OA\Items(ref="./components/schemas/User")
+     *             )
+     *         )
+     *     )
+     * )
+    */
     public function update(UserRequest $request, $id)
     {
         try {
@@ -56,7 +94,26 @@ class UserControllerAPI extends Controller
         }
     }
 
-    // Delete user
+    /**
+     * @OA\Delete(
+     *     path="/users/delete",
+     *     operationId="deleteUser",
+     *     tags={"Users"},
+     *     summary="Xóa người dùng theo id",
+     *     description="API này cho phép xóa người dùng theo id.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Thông báo xóa người dùng thành công",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 @OA\Items(ref="./components/schemas/User")
+     *             )
+     *         )
+     *     )
+     * )
+    */
     public function destroy($id)
     {
         try {
@@ -70,7 +127,36 @@ class UserControllerAPI extends Controller
         }
     }
 
-    // tìm kiếm người dùng theo keyword
+    /**
+     * @OA\Get(
+     *     path="/users/search",
+     *     operationId="searchUsers",
+     *     tags={"Users"},
+     *     summary="Tìm kiếm người dùng theo từ khóa",
+     *     description="API này cho phép tìm kiếm người dùng theo từ khóa trong tên hoặc email.",
+     *     @OA\Parameter(
+     *         name="keyword",
+     *         in="query",
+     *         required=false,
+     *         description="Từ khóa tìm kiếm người dùng",
+     *         @OA\Schema(
+     *             type="string",
+     *             example="John"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Danh sách người dùng tìm thấy",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(
+     *                 type="array",
+     *                 @OA\Items(ref="./components/schemas/User")
+     *             )
+     *         )
+     *     )
+     * )
+    */
     public function searchByKeyword(Request $request)
     {
         try {
