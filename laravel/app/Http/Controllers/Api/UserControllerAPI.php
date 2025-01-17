@@ -42,7 +42,7 @@ class UserControllerAPI extends Controller
      *             type="object",
      *             @OA\Property(
      *                 type="array",
-     *                 @OA\Items(ref="./components/schemas/User")
+     *                 @OA\Items(ref="../components/schemas/User")
      *             )
      *         )
      *     )
@@ -75,7 +75,7 @@ class UserControllerAPI extends Controller
      *             type="object",
      *             @OA\Property(
      *                 type="array",
-     *                 @OA\Items(ref="./components/schemas/User")
+     *                 @OA\Items(ref="../components/schemas/User")
      *             )
      *         )
      *     )
@@ -108,7 +108,7 @@ class UserControllerAPI extends Controller
      *             type="object",
      *             @OA\Property(
      *                 type="array",
-     *                 @OA\Items(ref="./components/schemas/User")
+     *                 @OA\Items(ref="../components/schemas/User")
      *             )
      *         )
      *     )
@@ -151,7 +151,7 @@ class UserControllerAPI extends Controller
      *             type="object",
      *             @OA\Property(
      *                 type="array",
-     *                 @OA\Items(ref="./components/schemas/User")
+     *                 @OA\Items(ref="../components/schemas/User")
      *             )
      *         )
      *     )
