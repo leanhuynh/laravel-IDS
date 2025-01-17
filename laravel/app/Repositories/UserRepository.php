@@ -35,8 +35,10 @@ class UserRepository implements UserRepositoryInterface
             $imagePath = $image->store('/images', 'public');
         }
 
-        $role_id = (!isset($data['role_id']) || empty(['role_id'])) ? $data['role_id'] : Constant::DEFAULT_USER_ROLE;
-
+        $role_id = (isset($data['role_id']) && !empty($data['role_id'])) 
+            ? $data['role_id'] 
+            : Constant::DEFAULT_USER_ROLE;
+            
         $newUser = $this->_model::create([
             'avatar' => $imagePath,
             'name' => $data['name'],
